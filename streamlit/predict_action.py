@@ -4,7 +4,7 @@ import keras
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
-
+import copy
 
 
 EMBEDDINGS_PATH = "./data/embeddings_v2.pkl"
@@ -123,7 +123,7 @@ class ActionsPredictor:
             action_id = self._encoded_to_labels[action_label]
             action_name, tramit_id = action_id.split("_")
             tramit_name = self._tramits_id_to_name[tramit_id]
-            parsed_output.append((tramit_name,action_name))
+            parsed_output.append((tramit_name, action_name))
         return parsed_output[:n]
 
     def _get_embedding(self, sentence):
@@ -145,7 +145,8 @@ class ActionsPredictor:
 
     def predict_action(self, actions):
         """Predict action using the loaded embeddings."""
-        clean_input = self.clean_input(actions)
+        actions_copy = copy.deepcopy(actions)
+        clean_input = self.clean_input(actions_copy)
         # PREDICT WITH MODEL
         parsed_input = self._parse_input(clean_input)
         # print(parsed_input)
