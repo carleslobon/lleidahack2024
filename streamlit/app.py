@@ -107,6 +107,11 @@ if st.session_state.page == 1:
         3: [["Multes de circulació (consulta de fotografies, identificació de conductors, interposició d'al·legacions o recursos, petició o aportació de proves)", "AFIT"], ["Consulta de fotografies de multes per infraccions", "AFIT"]],
         4: [["Padró d'Habitants: gestions d'alta, canvi de domicili, sol·licitud de certificats i altres gestions relacionades", "AFIT"], ["Sol·licitar certificats d'empadronament", "AFIT"]],
         5: [["Certificats del padró d'habitants. Expedició automàtica", "PFST"], ["Certificats del padró d'habitants. Expedició automàtica", "AFIT"], ["Cessió de dades personals al Padró Municipal d'Habitants", "AFIT"], ["Cessió de dades personals al Padró Municipal d'Habitants", "AFST"]],
+        6: [["Sol·licitar certificats d'empadronament", "AFIT"], ["Certificats del padró d'habitants. Expedició automàtica", "AFIT"]],
+        7: [["Llicències i comunicacions d'activitats", "AFIT"], ["Aportació de documentació de tràmits ja iniciats de l'àrea de Llicències d'activitats", "AFIT"]],
+        8: [["Aportació de documentació de tràmits ja iniciats de l'àrea de Llicències d'activitats", "AFIT"]],
+        9: [["Sol·licitar certificats d'empadronament", "AFIT"], ["Certificats del padró d'habitants. Expedició automàtica", "AFIT"]],
+        10: [["Padró d'Habitants: gestions d'alta, canvi de domicili, sol·licitud de certificats i altres gestions relacionades", "AFIT"], ["Sol·licitar certificats d'empadronament", "AFIT"], ["Certificats del padró d'habitants. Expedició automàtica", "AFIT"]],
     }
 
     secuencias_list = []
