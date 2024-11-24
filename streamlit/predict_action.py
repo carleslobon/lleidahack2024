@@ -140,7 +140,7 @@ class ActionsPredictor:
             action_id = action_id = self._encoded_to_labels[action[0]]
             action_name, tramit_id = action_id.split("_")
             tramit_name = self._tramits_id_to_name[tramit_id]
-            actions.add((tramit_name, action_name))
+            actions.add(tramit_name)
         return list(actions)
 
     def predict_action(self, actions):
