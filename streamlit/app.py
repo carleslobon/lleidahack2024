@@ -1,6 +1,13 @@
 import streamlit as st
 import pandas as pd
 from predict_action import ActionsPredictor
+import pandas as pd
+
+process = pd.read_csv('../datasets/tramits.csv')
+
+process = process[process['Vigent']]
+
+mapa_tramites = process.set_index('Titol').to_dict(orient='index')
 
 st.set_page_config(page_title="CityClick", layout="centered", initial_sidebar_state="collapsed")
 
@@ -153,8 +160,9 @@ if st.session_state.page == 1:
 elif st.session_state.page == 2:
     st.markdown("<h3 style='text-align: center; color: #3d3d3b; font-weight: bold;'>Create your custom sequence</h3>", unsafe_allow_html=True)
     st.markdown("<h5 style='text-align: center; color: #3d3d3b;'>Search and select a process</h3>", unsafe_allow_html=True)
-    tramite_busqueda = st.text_input("", "")
+    tramites = list(mapa_tramites.keys())
 
+    tramite_busqueda = st.text_input("", "")
     similares = []
     if tramite_busqueda:
         try:
@@ -165,7 +173,7 @@ elif st.session_state.page == 2:
     if similares:
         tramite_seleccionado = st.selectbox("Select the process you meant:", similares)
     else:
-        tramite_seleccionado = None
+        tramite_seleccionado = st.selectbox("Select the process you meant:", tramites)
 
     st.markdown("<h5 style='text-align: center; color: #3d3d3b;'>Select an action</h3>", unsafe_allow_html=True)
     accion_seleccionada = st.selectbox("", acciones)
