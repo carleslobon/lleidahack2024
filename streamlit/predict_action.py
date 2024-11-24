@@ -128,13 +128,20 @@ class ActionsPredictor:
 
     def _get_embedding(self, sentence):
         return self._embedding_model.encode(sentence)
-    
+
     def find_similarities(self, text):
         embedding = self._get_embedding(text)
-        actions_to_recommend = self._get_n_closest_actions(embedding, n=5)
+        actions_to_recommend = self._get_n_closest_actions(embedding, n=15)
         # Parse ouput
-        actions = self._parse_output(actions_to_recommend)
-        return actions
+        actions = set()
+        for action in actions_to_recommend:
+            if len(actions) == 5:
+                break
+            action_id = action[0]
+            action_name, tramit_id = action_id.split("_")
+            tramit_name = self._tramits_id_to_name[tramit_id]
+            actions.add((tramit_name, action_name))
+        return list(actions)
 
     def predict_action(self, actions):
         """Predict action using the loaded embeddings."""
