@@ -42,6 +42,7 @@ class ActionsPredictor:
         """Load model from file (if available)."""
         if os.path.exists(MODEL_PATH):
             self._model = keras.models.load_model(MODEL_PATH)
+            self._embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
         else:
             raise Exception("Model file not found.")
 
@@ -126,7 +127,7 @@ class ActionsPredictor:
         return parsed_output[:n]
 
     def _get_embedding(self, sentence):
-        return model.encode(sentence)
+        return self._embedding_model.encode(sentence)
     
     def find_similarities(self, text):
         embedding = self._get_embedding(text)
