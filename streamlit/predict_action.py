@@ -134,6 +134,5 @@ class ActionsPredictor:
         actions_to_recommend = self._get_n_closest_actions(prediction[0])
         # Parse ouput
         actions = self._parse_output(actions_to_recommend)
-        print(actions)
 
-        return actions[0]
+        return actions
