@@ -86,7 +86,7 @@ class ActionsPredictor:
         if len(input) < 3:
             add_generic()
         print(input)
-        return input[-3:]
+        return input
 
     def _parse_input(self, input):
         """Parse input to embeddings."""
@@ -100,7 +100,7 @@ class ActionsPredictor:
                 parsed_input.append(self._embeddings[encoded_action])
             else:
                 raise Exception(f"Action '{encoded_action}' not found in embeddings.")
-        return parsed_input
+        return parsed_input[-3:]
 
     def _get_n_closest_actions(self, prediction, n=6):
         """Get the n closest actions to the prediction."""

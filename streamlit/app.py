@@ -1,12 +1,9 @@
 import streamlit as st
 import pandas as pd
 from predict_action import ActionsPredictor
-import streamlit.components.v1 as components
 
 st.set_page_config(page_title="CityClick", layout="centered", initial_sidebar_state="collapsed")
 
-tramites = ["Trámite 1", "Trámite 2", "Trámite 3", "Trámite 4", "Trámite 5",
-            "Trámite 6", "Trámite 7", "Trámite 8", "Trámite 9", "Trámite 10"]
 acciones = ["AFIT", "AFST", "PFST"]
 
 if 'page' not in st.session_state:
