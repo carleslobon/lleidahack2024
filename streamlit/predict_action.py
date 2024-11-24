@@ -137,7 +137,7 @@ class ActionsPredictor:
         for action in actions_to_recommend:
             if len(actions) == 5:
                 break
-            action_id = action[0]
+            action_id = action_id = self._encoded_to_labels[action[0]]
             action_name, tramit_id = action_id.split("_")
             tramit_name = self._tramits_id_to_name[tramit_id]
             actions.add((tramit_name, action_name))
