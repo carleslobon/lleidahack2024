@@ -1,15 +1,17 @@
 import os
 import pickle
-import tensorflow as tf
+import keras
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
+from sentence_transformers import SentenceTransformer
 
 
-EMBEDDINGS_PATH = "./data/embeddings.pkl"
-MODEL_PATH = "./models/model_lstm_v2.keras"
-ENCODED_LABELS_PATH = "./data/encoded_to_label.pkl"
-LABELS_ENCODED_PATH = "./data/label_to_encoded.pkl"
-TRAMITS_MAP = "./data/tramits_map.pkl"
+
+EMBEDDINGS_PATH = "./data/embeddings_v2.pkl"
+MODEL_PATH = "./models/model_lstm_v4.h5"
+ENCODED_LABELS_PATH = "./data/encoded_to_label_v2.pkl"
+LABELS_ENCODED_PATH = "./data/label_to_encoded_v2.pkl"
+TRAMITS_MAP = "./data/tramits_map_v2.pkl"
 
 
 class ActionsPredictor:
@@ -39,7 +41,7 @@ class ActionsPredictor:
     def _load_model(self):
         """Load model from file (if available)."""
         if os.path.exists(MODEL_PATH):
-            self._model = tf.keras.models.load_model(MODEL_PATH)
+            self._model = keras.models.load_model(MODEL_PATH)
         else:
             raise Exception("Model file not found.")
 
@@ -120,8 +122,14 @@ class ActionsPredictor:
             action_id = self._encoded_to_labels[action_label]
             action_name, tramit_id = action_id.split("_")
             tramit_name = self._tramits_id_to_name[tramit_id]
-            parsed_output.append(tramit_name)
+            parsed_output.append((tramit_name,action_name))
         return parsed_output[:n]
+
+    def _get_embedding(sentence):
+        return model.encode(sentence)
+    
+    def find_similarities(self, text):
+        pass
 
     def predict_action(self, actions):
         """Predict action using the loaded embeddings."""
