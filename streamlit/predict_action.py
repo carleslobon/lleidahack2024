@@ -125,11 +125,15 @@ class ActionsPredictor:
             parsed_output.append((tramit_name,action_name))
         return parsed_output[:n]
 
-    def _get_embedding(sentence):
+    def _get_embedding(self, sentence):
         return model.encode(sentence)
     
     def find_similarities(self, text):
-        pass
+        embedding = self._get_embedding(text)
+        actions_to_recommend = self._get_n_closest_actions(embedding, n=5)
+        # Parse ouput
+        actions = self._parse_output(actions_to_recommend)
+        return actions
 
     def predict_action(self, actions):
         """Predict action using the loaded embeddings."""
